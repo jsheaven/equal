@@ -37,5 +37,7 @@ jobs:
           UPSTASH_REDIS_TEST_URL: ${{ secrets.UPSTASH_REDIS_TEST_URL }}
           UPSTASH_REDIS_TEST_TOKEN: ${{ secrets.UPSTASH_REDIS_TEST_TOKEN }}
       - name: Publish Test Results
-        uses: romeovs/lcov-reporter-action@v0.2.16
+        uses: ArtiomTr/jest-coverage-report-action@v2
         if: always()
+        with:
+          coverage-file: ./coverage/coverage-final.json
