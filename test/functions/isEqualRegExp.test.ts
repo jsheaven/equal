@@ -1,4 +1,4 @@
-import { isEqualRegExp } from '../dist/index.esm'
+import { isEqualRegExp } from '../../dist/index.esm'
 
 describe('isEqualRegExp', () => {
   it('returns true for identical RegExp objects', () => {

@@ -1,5 +1,5 @@
 import {jest} from '@jest/globals'
-import { getEnumerablePropertyNames, hasOwnProperty } from '../dist/index.esm'
+import { getEnumerablePropertyNames, hasOwnProperty } from '../../dist/index.esm'
 
 describe('getEnumerablePropertyNames', () => {
   it('returns an empty array for an empty object', () => {

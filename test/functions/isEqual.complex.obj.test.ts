@@ -1,4 +1,4 @@
-import { isEqual } from '../dist/index.esm'
+import { isEqual } from '../../dist/index.esm'
 
 describe('equal function', () => {
   const obj = {

@@ -1,4 +1,4 @@
-import { isEqual } from '../dist/index.esm'
+import { isEqual } from '../../dist/index.esm'
 
 describe('isEqual', () => {
   test('compares primitive values', () => {

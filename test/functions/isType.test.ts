@@ -1,4 +1,4 @@
-import { isType } from '../dist/index.esm'
+import { isType } from '../../dist/index.esm'
 
 describe('isType', () => {
   it('returns true for matching type', () => {

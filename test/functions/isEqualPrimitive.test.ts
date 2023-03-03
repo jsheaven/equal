@@ -1,4 +1,4 @@
-import { isEqualPrimitive } from '../dist/index.esm'
+import { isEqualPrimitive } from '../../dist/index.esm'
 
 describe('isEqualPrimitive', () => {
   it('returns true for two identical numbers', () => {

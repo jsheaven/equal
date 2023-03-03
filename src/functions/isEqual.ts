@@ -2,7 +2,7 @@ import { isDomNode } from './isDomNode'
 import { hasOwnProperty } from './hasOwnProperty'
 import { getEnumerablePropertyNames } from './getEnumerablePropertyNames'
 import { isEqualPrimitive } from './isEqualPrimitive'
-import { equalDates } from './isEqualDate'
+import { isEqualDates } from './isEqualDate'
 import { isEqualRegExp } from './isEqualRegExp'
 import { isEqualError } from './isEqualError'
 
@@ -39,7 +39,7 @@ export const isEqual = (
     case '[object Number]':
       return isEqualPrimitive(a, b)
     case '[object Date]':
-      return equalDates(a, b)
+      return isEqualDates(a, b)
     case '[object RegExp]':
       return isEqualRegExp(a, b)
   }

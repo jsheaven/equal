@@ -1,4 +1,4 @@
-import { isEqualError } from '../dist/index.esm'
+import { isEqualError } from '../../dist/index.esm'
 
 describe('isEqualError', () => {
   it('returns true for equal errors', () => {

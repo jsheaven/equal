@@ -1,4 +1,4 @@
-import { hasOwnProperty } from '../dist/index.esm'
+import { hasOwnProperty } from '../../dist/index.esm'
 
 describe('hasOwnProperty', () => {
   it('returns true when object has own property', () => {

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { isDomNode } from '../dist/index.esm'
+import { isDomNode } from '../../dist/index.esm'
 
 describe('isDomNode', () => {
   it('should return false for null or undefined inputs', () => {
