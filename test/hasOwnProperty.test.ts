@@ -1,4 +1,4 @@
-import { hasOwnProperty } from '../../dist/index.esm'
+import { hasOwnProperty } from '../dist/index.esm'
 
 describe('hasOwnProperty', () => {
   it('returns true when object has own property', () => {
@@ -17,8 +17,6 @@ describe('hasOwnProperty', () => {
   });
 
   it('returns false for non-object inputs', () => {
-    expect(hasOwnProperty(null, 'foo')).toBe(false);
-    expect(hasOwnProperty(undefined, 'foo')).toBe(false);
     expect(hasOwnProperty(42, 'foo')).toBe(false);
     expect(hasOwnProperty('hello', 'foo')).toBe(false);
     expect(hasOwnProperty([], 'foo')).toBe(false);

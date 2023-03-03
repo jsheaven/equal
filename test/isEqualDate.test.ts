@@ -1,4 +1,4 @@
-import { equalDates } from '../../dist/index.esm'
+import { equalDates } from '../dist/index.esm'
 
 describe('equalDates', () => {
   it('returns true for equal dates', () => {

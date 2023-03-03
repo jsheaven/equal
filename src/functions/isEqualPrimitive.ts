@@ -1,4 +1,4 @@
-export const equalPrimitive = (a: any, b: any): boolean => {
+export const isEqualPrimitive = (a: any, b: any): boolean => {
   if (typeof a !== typeof b) {
     // One is a primitive, one a `new Primitive()`
     return false;

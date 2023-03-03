@@ -1,4 +1,5 @@
-import { getEnumerablePropertyNames, hasOwnProperty } from '../../dist/index.esm'
+import {jest} from '@jest/globals'
+import { getEnumerablePropertyNames, hasOwnProperty } from '../dist/index.esm'
 
 describe('getEnumerablePropertyNames', () => {
   it('returns an empty array for an empty object', () => {
@@ -23,15 +24,16 @@ describe('getEnumerablePropertyNames', () => {
   });
 
   it('returns an array of enumerable property names, including symbol keys', () => {
+    const firstKey = Symbol('foo');
+    const secondKey = Symbol('bar')
     const obj = {
-      [Symbol('foo')]: 1,
-      [Symbol('bar')]: 2,
+      [firstKey]: 1,
+      [secondKey]: 2,
     };
-    expect(getEnumerablePropertyNames(obj)).toEqual(expect.arrayContaining([
-      expect.any(String),
-      Symbol('foo'),
-      Symbol('bar'),
-    ]));
+    expect(getEnumerablePropertyNames(obj)).toEqual([
+      firstKey,
+      secondKey,
+    ]);
   });
 
   it('uses the `hasKey` function to determine property existence', () => {

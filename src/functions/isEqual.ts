@@ -1,23 +1,23 @@
 import { isDomNode } from './isDomNode'
 import { hasOwnProperty } from './hasOwnProperty'
 import { getEnumerablePropertyNames } from './getEnumerablePropertyNames'
-import { equalPrimitive } from './equalPrimitive'
-import { equalDates } from './equalDate'
-import { equalRegExp } from './equalRegExp'
-import { equalError } from './equalError'
+import { isEqualPrimitive } from './isEqualPrimitive'
+import { equalDates } from './isEqualDate'
+import { isEqualRegExp } from './isEqualRegExp'
+import { isEqualError } from './isEqualError'
 
 
-export const equal = (
+export const isEqual = (
   a: any,
   b: any,
-  aStack: Array<unknown>,
-  bStack: Array<unknown>,
-  strictCheck: boolean | undefined,
+  strictCheck: boolean = true,
+  aStack: Array<unknown> = [],
+  bStack: Array<unknown> = [],
 ): boolean => {
   let result = true
 
   if (a instanceof Error && b instanceof Error) {
-    return equalError(a,b)
+    return isEqualError(a,b)
   }
 
   if (Object.is(a, b)) {
@@ -37,11 +37,11 @@ export const equal = (
     case '[object Boolean]':
     case '[object String]':
     case '[object Number]':
-      return equalPrimitive(a, b)
+      return isEqualPrimitive(a, b)
     case '[object Date]':
       return equalDates(a, b)
     case '[object RegExp]':
-      return equalRegExp(a, b)
+      return isEqualRegExp(a, b)
   }
 
   if (typeof a !== 'object' || typeof b !== 'object') {
@@ -94,11 +94,11 @@ export const equal = (
     if (strictCheck)
       result =
         hasOwnProperty(b, key) &&
-        equal(a[key], b[key], aStack, bStack, strictCheck)
+        isEqual(a[key], b[key], strictCheck, aStack, bStack)
     else
       result =
         (hasOwnProperty(b, key) || a[key] === undefined) &&
-        equal(a[key], b[key], aStack, bStack, strictCheck)
+        isEqual(a[key], b[key], strictCheck, aStack, bStack)
 
     if (!result) {
       return false

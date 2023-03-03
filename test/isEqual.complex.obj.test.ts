@@ -1,4 +1,4 @@
-import { equal } from '../../dist/index.esm'
+import { isEqual } from '../dist/index.esm'
 
 describe('equal function', () => {
   const obj = {
@@ -16,7 +16,7 @@ describe('equal function', () => {
   }
 
   it('should return true for equal objects with deep of 4', () => {
-    expect(equal(obj, {
+    expect(isEqual(obj, {
       prop1: 123,
       prop2: 'test',
       prop3: {
@@ -28,11 +28,11 @@ describe('equal function', () => {
         },
       },
       prop4: new Date('2022-12-01T00:00:00Z'),
-    }, [], [], true)).toBe(true)
+    }, true)).toBe(true)
   })
 
   it('should return false for non-equal objects with deep of 4', () => {
-    expect(equal(obj, {
+    expect(isEqual(obj, {
       prop1: 123,
       prop2: 'test',
       prop3: {
@@ -44,7 +44,7 @@ describe('equal function', () => {
         },
       },
       prop4: new Date('2022-12-01T00:00:00Z'),
-    }, [], [], true)).toBe(false)
+    }, true)).toBe(false)
   })
   it('returns true if the objects are equal', () => {
     const a = {
@@ -61,7 +61,7 @@ describe('equal function', () => {
         },
       },
     }
-    expect(equal(a, b, [], [], false)).toBe(true)
+    expect(isEqual(a, b, false)).toBe(true)
   })
 
   it('returns false if the objects have a different value at the third level', () => {
@@ -79,7 +79,7 @@ describe('equal function', () => {
         },
       },
     }
-    expect(equal(a, b, [], [], false)).toBe(false)
+    expect(isEqual(a, b, false)).toBe(false)
   })
 
   it('returns false if the objects have a different key at the second level', () => {
@@ -97,7 +97,7 @@ describe('equal function', () => {
         },
       },
     }
-    expect(equal(a, b, [], [], false)).toBe(false)
+    expect(isEqual(a, b, false)).toBe(false)
   })
 
   it('returns false if one object has more keys at the second level', () => {
@@ -118,7 +118,7 @@ describe('equal function', () => {
         },
       },
     }
-    expect(equal(a, b, [], [], false)).toBe(false)
+    expect(isEqual(a, b, false)).toBe(false)
   })
 
   it('returns false if the objects have a different key at the first level', () => {
@@ -136,7 +136,7 @@ describe('equal function', () => {
         },
       },
     }
-    expect(equal(a, b, [], [], false)).toBe(false)
+    expect(isEqual(a, b, false)).toBe(false)
   })
 
   it('returns false if one object has more keys at the first level', () => {
@@ -157,7 +157,7 @@ describe('equal function', () => {
         f: 2,
       },
     }
-    expect(equal(a, b, [], [], false)).toBe(false)
+    expect(isEqual(a, b, false)).toBe(false)
   })
   it('should return true for a complex object with a depth of 3', () => {
     const a = {
@@ -194,7 +194,7 @@ describe('equal function', () => {
       interests: ['reading', 'movies', 'hiking'],
     }
 
-    expect(equal(a, b, [], [], false)).toBe(true)
+    expect(isEqual(a, b, false)).toBe(true)
   })
 
   it('should return false for a complex object with a depth of 3 and different properties', () => {
@@ -232,7 +232,7 @@ describe('equal function', () => {
       interests: ['reading', 'movies', 'traveling'],
     }
 
-    expect(equal(a, b, [], [], false)).toBe(false)
+    expect(isEqual(a, b, false)).toBe(false)
   })
   it('should handle circular references', () => {
     const a: any = { name: 'A' };
@@ -241,8 +241,8 @@ describe('equal function', () => {
     a.b = b;
     b.c = c;
     c.a = a;
-    expect(equal(a, a, [],[], false)).toBe(true);
-    expect(equal(a, b, [],[], false)).toBe(false);
-    expect(equal(a, c, [],[], false)).toBe(false);
+    expect(isEqual(a, a,  false)).toBe(true);
+    expect(isEqual(a, b,  false)).toBe(false);
+    expect(isEqual(a, c,  false)).toBe(false);
   });
 })
