@@ -39,5 +39,3 @@ jobs:
       - name: Publish Test Results
         uses: ArtiomTr/jest-coverage-report-action@v2
         if: always()
-        with:
-          coverage-file: ./coverage/coverage-final.json
