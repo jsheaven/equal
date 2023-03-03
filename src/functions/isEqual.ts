@@ -29,7 +29,8 @@ export const isEqual = (
   }
 
   const className = Object.prototype.toString.call(a)
-  if (className != Object.prototype.toString.call(b)) {
+  const otherClassName = Object.prototype.toString.call(b)
+  if (className !== otherClassName) {
     return false
   }
 
