@@ -6,11 +6,12 @@
 
 1. As a developer, I want to use isEqual for comparing two values
 
-2. As a developer, I don't want to for every type / object an own comparator
+2. As a developer, I don't want to create a custom comparator
 
 <h2 align="center">Features</h2>
 
 - ✅ Compares two values for equality.
+- ✅ Includes also circular references.
 - ✅ Available as a simple API and simple to use CLI
 - ✅ Just `775 byte` nano sized (ESM, gizpped)
 - ✅ Tree-shakable and side-effect free
