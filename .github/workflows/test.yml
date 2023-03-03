@@ -33,11 +33,8 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn build
       - run: yarn test
-        env:
-          UPSTASH_REDIS_TEST_URL: ${{ secrets.UPSTASH_REDIS_TEST_URL }}
-          UPSTASH_REDIS_TEST_TOKEN: ${{ secrets.UPSTASH_REDIS_TEST_TOKEN }}
       - uses: artiomtr/jest-coverage-report-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          coverage-file: ./coverage/coverage-final.json
+          coverage-file: ./coverage/report.json
           skip-step: all
