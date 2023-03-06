@@ -5,7 +5,7 @@ import { isEqualPrimitive } from './isEqualPrimitive'
 import { isEqualDates } from './isEqualDate'
 import { isEqualRegExp } from './isEqualRegExp'
 import { isEqualError } from './isEqualError'
-
+import { isCircularRef } from './isCircularRef'
 
 export const isEqual = (
   a: any,
@@ -23,6 +23,7 @@ export const isEqual = (
   if (Object.is(a, b)) {
     return true
   }
+
   // A strict comparison is necessary because `null == undefined`.
   if (a === null || b === null) {
     return a === b
@@ -54,19 +55,11 @@ export const isEqual = (
     return a.isEqualNode(b)
   }
 
-  // Used to detect circular references.
-  let length = aStack.length
-  while (length--) {
-    // Linear search. Performance is inversely proportional to the number of
-    // unique nested structures.
-    // circular references at same depth are equal
-    // circular reference is not equal to non-circular one
-    if (aStack[length] === a) {
-      return bStack[length] === b
-    } else if (bStack[length] === b) {
-      return false
-    }
+  const circularResult = isCircularRef(a,b,aStack, bStack)
+  if(typeof circularResult !== 'undefined'){
+    return circularResult
   }
+
   // Add the first object to the stack of traversed objects.
   aStack.push(a)
   bStack.push(b)
@@ -105,11 +98,10 @@ export const isEqual = (
       return false
     }
   }
+
   // Remove the first object from the stack of traversed objects.
   aStack.pop()
   bStack.pop()
 
   return result
 }
-
-
