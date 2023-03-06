@@ -16,4 +16,9 @@ export default {
       },
     ],
   },
+  coverageThreshold: {
+    global: {
+      lines: 100,
+    },
+  },
 }
