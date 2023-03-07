@@ -130,7 +130,6 @@ describe('isEqual', () => {
   })
 
   describe('when given objects with circular references', () => {
-
     it('should correctly identify them sa equal', () => {
       const a: any = { foo: 'bar' }
       const b: any = { foo: 'bar' }
@@ -146,7 +145,7 @@ describe('isEqual', () => {
   it('should correctly identify them as not equal', () => {
     const a: any = { foo: 'bar' }
     const b1: any = { foo: 'bar', arr: [1] }
-    const b2: any = { foo: 'bar',arr: [1,2,3] }
+    const b2: any = { foo: 'bar', arr: [1, 2, 3] }
     const c: any = { foo: 'bar' }
     a.new = a // circular reference
     a.b = b1
@@ -170,10 +169,8 @@ describe('isEqual', () => {
   })
 
   it('should return false if one of the arguments is not an object', () => {
-    const a = function() {
-    }
-    const b = function() {
-    }
+    const a = function () {}
+    const b = function () {}
     expect(isEqual(a, b)).toBe(false)
   })
 
@@ -184,18 +181,16 @@ describe('isEqual', () => {
     expect(result).toBe(true)
   })
 
-
   it('should return false deep equal', () => {
     const a = { prop1: { nestedProp1: 'value1' } }
     const b = { prop1: { nestedProp1: 'value2' } }
     expect(isEqual(a, b)).toBe(false)
   })
 
-  it("returns true when comparing object with circular reference", () => {
-    const a = { foo: "bar" } as any;
-    const b = { foo: "bar", circular: a } ;
-    a.circular = b;
-    expect(isEqual(a, b)).toBe(true);
-  });
-
+  it('returns true when comparing object with circular reference', () => {
+    const a = { foo: 'bar' } as any
+    const b = { foo: 'bar', circular: a }
+    a.circular = b
+    expect(isEqual(a, b)).toBe(true)
+  })
 })

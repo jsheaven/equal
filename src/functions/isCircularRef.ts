@@ -1,8 +1,4 @@
-export const isCircularRef = (a: any,
-                              b: any,
-                              aStack: Array<unknown>,
-                              bStack: Array<unknown>,
-): boolean | undefined => {
+export const isCircularRef = (a: any, b: any, aStack: Array<unknown>, bStack: Array<unknown>): boolean | undefined => {
   // Used to detect circular references.
   let length = aStack.length
   while (length--) {

@@ -16,35 +16,47 @@ describe('equal function', () => {
   }
 
   it('should return true for equal objects with deep of 4', () => {
-    expect(isEqual(obj, {
-      prop1: 123,
-      prop2: 'test',
-      prop3: {
-        nested1: true,
-        nested2: [1, 2, 3],
-        nested3: {
-          deeper1: { foo: 'bar' },
-          deeper2: null,
+    expect(
+      isEqual(
+        obj,
+        {
+          prop1: 123,
+          prop2: 'test',
+          prop3: {
+            nested1: true,
+            nested2: [1, 2, 3],
+            nested3: {
+              deeper1: { foo: 'bar' },
+              deeper2: null,
+            },
+          },
+          prop4: new Date('2022-12-01T00:00:00Z'),
         },
-      },
-      prop4: new Date('2022-12-01T00:00:00Z'),
-    }, true)).toBe(true)
+        true,
+      ),
+    ).toBe(true)
   })
 
   it('should return false for non-equal objects with deep of 4', () => {
-    expect(isEqual(obj, {
-      prop1: 123,
-      prop2: 'test',
-      prop3: {
-        nested1: true,
-        nested2: [1, 2, 3],
-        nested3: {
-          deeper1: { foo: 'bar' },
-          deeper2: undefined,
+    expect(
+      isEqual(
+        obj,
+        {
+          prop1: 123,
+          prop2: 'test',
+          prop3: {
+            nested1: true,
+            nested2: [1, 2, 3],
+            nested3: {
+              deeper1: { foo: 'bar' },
+              deeper2: undefined,
+            },
+          },
+          prop4: new Date('2022-12-01T00:00:00Z'),
         },
-      },
-      prop4: new Date('2022-12-01T00:00:00Z'),
-    }, true)).toBe(false)
+        true,
+      ),
+    ).toBe(false)
   })
   it('returns true if the objects are equal', () => {
     const a = {
@@ -235,14 +247,14 @@ describe('equal function', () => {
     expect(isEqual(a, b, false)).toBe(false)
   })
   it('should handle circular references', () => {
-    const a: any = { name: 'A' };
-    const b: any = { name: 'B' };
-    const c: any = { name: 'C' };
-    a.b = b;
-    b.c = c;
-    c.a = a;
-    expect(isEqual(a, a,  false)).toBe(true);
-    expect(isEqual(a, b,  false)).toBe(false);
-    expect(isEqual(a, c,  false)).toBe(false);
-  });
+    const a: any = { name: 'A' }
+    const b: any = { name: 'B' }
+    const c: any = { name: 'C' }
+    a.b = b
+    b.c = c
+    c.a = a
+    expect(isEqual(a, a, false)).toBe(true)
+    expect(isEqual(a, b, false)).toBe(false)
+    expect(isEqual(a, c, false)).toBe(false)
+  })
 })

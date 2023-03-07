@@ -1,5 +1,4 @@
-
-export const isDomNode = (obj: any): boolean  => {
+export const isDomNode = (obj: any): boolean => {
   // Use DOM3 method isEqualNode (IE>=9)
   return (
     obj !== null &&
@@ -7,5 +6,5 @@ export const isDomNode = (obj: any): boolean  => {
     typeof obj.nodeType === 'number' &&
     typeof obj.nodeName === 'string' &&
     typeof obj.isEqualNode === 'function'
-  );
+  )
 }

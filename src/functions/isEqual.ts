@@ -17,7 +17,7 @@ export const isEqual = (
   let result = true
 
   if (a instanceof Error && b instanceof Error) {
-    return isEqualError(a,b)
+    return isEqualError(a, b)
   }
 
   if (Object.is(a, b)) {
@@ -55,8 +55,8 @@ export const isEqual = (
     return a.isEqualNode(b)
   }
 
-  const circularResult = isCircularRef(a,b,aStack, bStack)
-  if(typeof circularResult !== 'undefined'){
+  const circularResult = isCircularRef(a, b, aStack, bStack)
+  if (typeof circularResult !== 'undefined') {
     return circularResult
   }
 
@@ -85,14 +85,9 @@ export const isEqual = (
     key = aKeys[size]
 
     // Deep compare each member
-    if (strictCheck)
-      result =
-        hasOwnProperty(b, key) &&
-        isEqual(a[key], b[key], strictCheck, aStack, bStack)
+    if (strictCheck) result = hasOwnProperty(b, key) && isEqual(a[key], b[key], strictCheck, aStack, bStack)
     else
-      result =
-        (hasOwnProperty(b, key) || a[key] === undefined) &&
-        isEqual(a[key], b[key], strictCheck, aStack, bStack)
+      result = (hasOwnProperty(b, key) || a[key] === undefined) && isEqual(a[key], b[key], strictCheck, aStack, bStack)
 
     if (!result) {
       return false
