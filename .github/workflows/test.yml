@@ -18,19 +18,17 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
         node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-    permissions:
-      issues: write
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
       - uses: actions/cache@v3
         with:
           path: 'node_modules'
           key: ${{ runner.os }}-${{ matrix.node-version }}-modules-${{ hashFiles('yarn.lock') }}
       - run: yarn install --frozen-lockfile
+      - run: yarn lint
       - run: yarn build
       - run: yarn test
