@@ -73,7 +73,7 @@ jobs:
         with:
           name: artifact
           path: dist
-       - uses: actions/cache@v3
+      - uses: actions/cache@v3
         with:
           path: 'node_modules'
           key: ${{ runner.os }}-${{ matrix.node-version }}-modules-${{ hashFiles('yarn.lock') }}
