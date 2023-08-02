@@ -11,13 +11,28 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [18.x]
+    steps:
+      - uses: actions/cache@v3
+        with:
+          path: 'node_modules'
+          key: ${{ runner.os }}-${{ matrix.node-version }}-modules-${{ hashFiles('yarn.lock') }}
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - name: Add artifact to github
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifact
+          path: dist
+  test:
+    needs: [build]
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
@@ -28,21 +43,19 @@ jobs:
         with:
           path: 'node_modules'
           key: ${{ runner.os }}-${{ matrix.node-version }}-modules-${{ hashFiles('yarn.lock') }}
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --frozen-lockfile    
       - run: yarn lint
-      - run: yarn build
-      - name: Add artifact to github
-        uses: actions/upload-artifact@v2
+      - name: Download build
+        uses: actions/download-artifact@v2
         with:
           name: artifact
           path: dist
       - run: yarn test
   npm-publish:
-    needs: [build]
+    needs: [build, test]
     name: npm-publish
     runs-on: ubuntu-latest
-    # only on master
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
