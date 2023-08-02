@@ -59,6 +59,10 @@ jobs:
     name: npm-publish
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [18.x]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -69,6 +73,11 @@ jobs:
         with:
           name: artifact
           path: dist
+       - uses: actions/cache@v3
+        with:
+          path: 'node_modules'
+          key: ${{ runner.os }}-${{ matrix.node-version }}-modules-${{ hashFiles('yarn.lock') }}
+      - run: yarn install --frozen-lockfile        
       - run: yarn release:package 
       - name: Publish if version in package.json change
         uses: springtype-org/github-action-npm-publish@master
