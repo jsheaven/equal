@@ -78,13 +78,13 @@ jobs:
           path: 'node_modules'
           key: ${{ runner.os }}-${{ matrix.node-version }}-modules-${{ hashFiles('yarn.lock') }}
       - run: yarn install --frozen-lockfile        
-      - run: yarn release:package 
+      - run: yarn release:package && ls -lisha release
       - name: Publish if version in package.json change
         uses: springtype-org/github-action-npm-publish@master
         with:
           install_build_packages: false
           project_build_dir: release
           create_tag: true
-          auth_token: ${{ secrets.NPM_TOKEN }}
+          auth_token: ${{ secrets.npm_token }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
