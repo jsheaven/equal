@@ -31,4 +31,35 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn lint
       - run: yarn build
+      - name: Add artifact to github
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifact
+          path: dist
       - run: yarn test
+  npm-publish:
+    needs: [build]
+    name: npm-publish
+    runs-on: ubuntu-latest
+    # only on master
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+      - name: Download build
+        uses: actions/download-artifact@v2
+        with:
+          name: artifact
+          path: dist
+      - run: yarn release:package 
+      - name: Publish if version in package.json change
+        uses: springtype-org/github-action-npm-publish@master
+        with:
+          install_build_packages: false
+          project_build_dir: release
+          create_tag: true
+          auth_token: ${{ secrets.NPM_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

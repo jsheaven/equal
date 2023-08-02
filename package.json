@@ -19,17 +19,18 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "pretest": "yarn build --dev",
     "test": "NODE_OPTIONS='--experimental-vm-modules --enable-source-maps --no-warnings' jest --verbose --coverage ./test/*.test.ts ./test/**/*.test.ts",
     "clean": "rm -rf ./dist && rm -rf ./coverage",
     "lint": "prettier --check .",
     "lint:fix": "prettier --write .",
     "prebuild": "yarn clean",
     "build": "yarn node --enable-source-maps ./build.mjs",
+    "prerelease:package": "rm -rf ./release",
+    "release:package": "mkdir release && cp -r dist package.json LICENSE README.md release/",
     "pre-commit": "yarn lint",
     "pre-push": "yarn lint"
   },
-  "author": "Aron Homberg <info@aron-homberg.de>",
+  "author": "Michael Mannseicher<m.mansi1@gmx.net>",
   "sideEffects": false,
   "exports": {
     ".": {
