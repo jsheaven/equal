@@ -10,9 +10,9 @@
 
 <h2 align="center">User Stories</h2>
 
-1. As a developer, I want to use isEqual for comparing two values
+1. As a developer, i want to use isEqual for comparing two values
 
-2. As a developer, I don't want to create a custom comparator
+2. As a developer, i don't want to create a custom comparator
 
 <h2 align="center">Features</h2>
 
