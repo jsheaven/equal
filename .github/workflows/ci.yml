@@ -72,12 +72,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: artifact
-          path: dist
-      - uses: actions/cache@v3
-        with:
-          path: 'node_modules'
-          key: ${{ runner.os }}-${{ matrix.node-version }}-modules-${{ hashFiles('yarn.lock') }}
-      - run: yarn install --frozen-lockfile        
+          path: dist      
       - run: yarn release:package && ls -lisha release
       - name: Publish if version in package.json change
         uses: springtype-org/github-action-npm-publish@master
