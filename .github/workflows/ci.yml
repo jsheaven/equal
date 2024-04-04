@@ -85,6 +85,6 @@ jobs:
           install_build_packages: false
           project_build_dir: release
           create_tag: true
-          auth_token: ${{ secrets.npm_token }}
+          auth_token: ${{ secrets.NPM_TOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
