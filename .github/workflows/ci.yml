@@ -75,6 +75,12 @@ jobs:
           path: dist      
       - run: yarn release:package
       - run: ls -lisha release
-      - run: cd release && npm publish --access public
+      - name: Publish if version in package.json change
+        uses: springtype-org/github-action-npm-publish@master
+        with:
+          install_build_packages: true
+          project_build_dir: release
+          create_tag: true
+          auth_token: ${{ secrets.NPM_TOKEN }}
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
