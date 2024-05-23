@@ -1,5 +1,6 @@
 ## Please check .eslintignore and .gitignore when changing this file
 dist
+release
 node_modules
 
 ## file extensions
