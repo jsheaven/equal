@@ -75,6 +75,6 @@ jobs:
           path: dist      
       - run: yarn release:package
       - run: ls -lisha release
-      - run: npm publish release --access public
+      - run: npm publish --prefix release --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
