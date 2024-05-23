@@ -25,8 +25,7 @@
     "lint:fix": "prettier --write .",
     "prebuild": "yarn clean",
     "build": "yarn node --enable-source-maps ./build.mjs",
-    "prerelease:package": "rm -rf ./release",
-    "release:package": "mkdir release && cp -r dist package.json LICENSE README.md release/",
+    "release:package": "yarn node --enable-source-maps ./release.mjs",
     "pre-commit": "yarn lint",
     "pre-push": "yarn lint"
   },
